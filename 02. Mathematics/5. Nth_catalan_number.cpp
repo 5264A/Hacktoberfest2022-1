@@ -1,33 +1,30 @@
+
 #include <iostream>
 using namespace std;
  
-/*
-    Program to find nth Catalan number
-    Constraints 1<=n<=19
-
-*/
-long catalan(int n)
+// A recursive function to find nth catalan number
+unsigned long int catalan(unsigned int n)
 {
-    long ar[n + 1];
+    // Base case
+    if (n <= 1)
+        return 1;
  
-    ar[0] = 1;
-    ar[1] = 1;
-    
-    for (int i = 2; i <= n; i++) {
-        ar[i] = 0;
-        for (int j = 0; j < i; j++)
-            ar[i] += ar[j] * ar[i - j - 1];
-    }
+    // catalan(n) is sum of
+    // catalan(i)*catalan(n-i-1)
+    unsigned long int res = 0;
+    for (int i = 0; i < n; i++)
+        res += catalan(i) * catalan(n - i - 1);
  
-   
-    return ar[n];
+    return res;
 }
  
+// Driver code
 int main()
-{
-    int n;
-    cout<<"Enter the number ";
-    cin>>n;
-    cout<<"\n"<<n<<"th Catalan number is:"<<catalan(n)<<"\n";
+{int n;
+ cout<<"Write a number you want a catalan"<<endl;
+ cin>>n;
+ 
+    for (int i = 0; i < n; i++)
+        cout << catalan(i) << " ";
     return 0;
 }
